@@ -1,5 +1,16 @@
-from bottle import get, post, run, template, debug, request, redirect
+# A very simple Bottle Hello World app for you to get started with...
+import os
 import sqlite3
+
+from bottle import get, post, request, template, redirect
+
+ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
+
+if ON_PYTHONANYWHERE:
+    from bottle import default_app 
+else:
+    from bottle import run, debug
+
 
 @get('/')
 def get_show_list():
@@ -10,9 +21,11 @@ def get_show_list():
     cursor.close()
     return template("show_list", rows=result)
 
+
 @get('/new_item')
 def get_new_item():
     return template("new_item")
+
 
 @post('/new_item')
 def post_new_item():
@@ -24,5 +37,11 @@ def post_new_item():
     cursor.close()
     redirect('/')
 
-debug(True)
-run(host="localhost", port=8080)
+
+if ON_PYTHONANYWHERE:
+    application = default_app()
+else:
+    debug(True)
+    run(host="localhost", port=8080)
+
+

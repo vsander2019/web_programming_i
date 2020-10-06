@@ -1,37 +1,24 @@
-<html>
-<head>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-<h3 class="w3-block w3-teal w3-center">Basic Todo List, version 1.1</h3>
+<h3>Basic Todo List, version 1.1</h3>
 <hr/>
-<table class="w3-table w3-bordered w3-border">
+<table border="1">
 %for row in rows:
     <tr>
-
+        <td>{{str(row[0])}}</td>
         <td>
-            <a href="/update_item/{{row[0]}}"><i class="material-icons">edit</i></a>
+            <a href="/update_item/{{row[0]}}">{{row[1]}}</a>
         </td>
-
-        <td>
-        {{row[1]}}
-        </td>
-
         <td>
         %if row[2]==0:
-            <a href="/set_status/{{row[0]}}/1"><i class="material-icons">check_box_outline_blank</i</a>
+            <a href="/set_status/{{row[0]}}/1">[ {{str(row[2])}} ]</a>
         %else:
-            <a href="/set_status/{{row[0]}}/0"><i class="material-icons">check_box</i</a>
+            <a href="/set_status/{{row[0]}}/0">[ {{str(row[2])}} ]</a>
         %end
         </td>
         <td>
-            <a href="/delete_item/{{row[0]}}"><i class="material-icons">delete</i></a>
+            <a href="/delete_item/{{row[0]}}">DELETE</a>
         </td>
     </tr>
 %end
 </table>
-</hr>
-<a href="/new_item"><p><button class="w3-button w3-block w3-teal">New Item</button></p></a>
-</body>
-</html>
+<hr/>
+<a href="/new_item">New Item...</a>

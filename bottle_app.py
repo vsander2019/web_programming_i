@@ -1,8 +1,10 @@
 # A very simple Bottle Hello World app for you to get started with...
+import datetime
 import os
+import random
 import sqlite3
 
-from bottle import get, post, request, template, redirect
+from bottle import get, post, request, response, template, redirect
 
 ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
 
@@ -11,6 +13,7 @@ if ON_PYTHONANYWHERE:
 else:
     from bottle import run, debug
 
+random.seed()
 
 @get('/')
 def get_show_list():
@@ -78,6 +81,27 @@ def get_delete_item(id):
     connection.commit()
     cursor.close()
     redirect('/')
+
+visits = 0
+
+visit_times = {
+    }
+first_visit = {
+    }
+
+@get("/visit")
+def get_visit():
+    visit_counter = int(request.cookies.get("visit_counter",'0'))
+    user_id = request.cookies.get("user_id",str(random.randint(1000000000,2000000000)))
+    visit_counter = visit_counter + 1
+    response.set_cookie("visit_counter",str(visit_counter))
+    response.set_cookie("user_id",user_id)
+    last_visit = visit_times.get(user_id,"never")
+    visit_times[user_id] = str(datetime.datetime.now())
+    if last_visit == "never":
+        first_visit[user_id] = visit_times[user_id]
+    return("User #" + user_id + ", you have visited this useless web page " +
+        str(visit_counter) + " times, and your last visit was at " + last_visit + ", with your first visit on " + first_visit[user_id] + ".")
 
 if ON_PYTHONANYWHERE:
     application = default_app()

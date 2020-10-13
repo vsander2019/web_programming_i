@@ -24,6 +24,9 @@ def get_show_list():
     cursor.close()
     return template("show_list", rows=result)
 
+@get('/sandbox')
+def get_sandbox():
+    return template("sandbox")
 
 @get('/set_status/<id:int>/<value:int>')
 def get_set_status(id, value):

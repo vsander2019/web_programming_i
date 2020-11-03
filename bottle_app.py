@@ -3,7 +3,15 @@ import datetime
 import os
 import random
 import sqlite3
+import uuid
 
+<<<<<<< HEAD
+=======
+from tinydb import TinyDB, Query
+db = TinyDB("sessions.json")
+query = Query()
+
+>>>>>>> 695504f12aab72cc0fd97c385a5a53ea940c815c
 from bottle import get, post, request, response, template, redirect
 
 ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
@@ -85,6 +93,7 @@ def get_delete_item(id):
     cursor.close()
     redirect('/')
 
+<<<<<<< HEAD
 visits = 0
 
 visit_times = {
@@ -105,6 +114,22 @@ def get_visit():
     if last_visit == "never":
         first_visit[user_id] = visit_times[user_id]
     return("User #" + user_id + " you have visited this useless webpage " + str(visit_counter) + "times, and last visit was" + last_visit + "and your first visit was" + first_visit[user_id])
+=======
+
+@get("/visit")
+def get_visit():
+    session_id = request.cookies.get("session_id",str(uuid.uuid4()))
+    result = db.search(query.session_id == session_id)
+    if len(result) == 0:
+        db.insert({'session_id':session_id, 'visit_count':1})
+        visit_count = 1
+    else:
+        session = result[0]
+        visit_count = session['visit_count'] + 1
+        db.update({'visit_count':visit_count},query.session_id == session_id)
+    response.set_cookie("session_id",session_id)
+    return(f"Welcome, session_id #{session_id}. Visit# {visit_count}.")
+>>>>>>> 695504f12aab72cc0fd97c385a5a53ea940c815c
 
 if ON_PYTHONANYWHERE:
     application = default_app()

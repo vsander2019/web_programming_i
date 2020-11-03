@@ -1,5 +1,6 @@
 <html>
 <head>
+<<<<<<< HEAD
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -12,6 +13,22 @@
 
         <td>
             <a href="/update_item/{{row[0]}}"><i class="material-icons">edit</i></a>
+=======
+<title>Todo List 0.001</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" >
+</head>
+<body>
+<h3 class="w3-block w3-teal w3-center">Basic Todo List, version 1.1</h3>
+<table class="w3-table w3-bordered w3-border">
+%for row in rows:
+    <tr>
+        <td>
+            <a href="/update_item/{{row[0]}}"><i class="material-icons">edit</i></a>
+        </td>
+        <td>
+            {{row[1]}}
+>>>>>>> 695504f12aab72cc0fd97c385a5a53ea940c815c
         </td>
 
         <td>
@@ -20,9 +37,15 @@
 
         <td>
         %if row[2]==0:
+<<<<<<< HEAD
             <a href="/set_status/{{row[0]}}/1"><i class="material-icons">check_box_outline_blank</i</a>
         %else:
             <a href="/set_status/{{row[0]}}/0"><i class="material-icons">check_box</i</a>
+=======
+            <a href="/set_status/{{row[0]}}/1"><i class="material-icons">check_box_outline_blank</i></a>
+        %else:
+            <a href="/set_status/{{row[0]}}/0"><i class="material-icons">check_box</i></a>
+>>>>>>> 695504f12aab72cc0fd97c385a5a53ea940c815c
         %end
         </td>
         <td>
@@ -31,7 +54,11 @@
     </tr>
 %end
 </table>
+<<<<<<< HEAD
 </hr>
 <a href="/new_item"><p><button class="w3-button w3-block w3-teal">New Item</button></p></a>
+=======
+<a href="/new_item"><button class="w3-button w3-block w3-teal">New item...</button></a>
+>>>>>>> 695504f12aab72cc0fd97c385a5a53ea940c815c
 </body>
 </html>

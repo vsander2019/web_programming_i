@@ -90,6 +90,12 @@ def get_delete_item(id):
     cursor.close()
     redirect('/')
 
+@get("/picture")
+def get_picture():
+    # picture from here: https://editor.p5js.org/p5/sketches/Hello_P5:_animate
+    # p5js.org
+    return template("picture")
+
 
 @get("/visit")
 def get_visit():

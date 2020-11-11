@@ -105,28 +105,6 @@ first_visit = {
 
 @get("/visit")
 def get_visit():
-    visit_counter = int(request.get_cookie("visit_counter", '0'))
-    user_id = request.cookies.get("user_id", str(random.randint(1000000000,2000000000)))
-    visit_counter = visit_counter + 1
-    response.set_cookie("visit_counter", str(visit_counter))
-    response.set_cookie("user_id", user_id, max_age = 300, httponly= True, secure= True)
-    last_visit = visit_times.get(user_id, "never")
-    visit_times[user_id] = str(datetime.datetime.now())
-    if last_visit == "never":
-        first_visit[user_id] = visit_times[user_id]
-    return("User #" + user_id + " you have visited this useless webpage " + str(visit_counter) + "times, and last visit was" + last_visit + "and your first visit was" + first_visit[user_id])
-=======
-=======
-@get("/picture")
-def get_picture():
-    # picture from here: https://editor.p5js.org/p5/sketches/Hello_P5:_animate
-    # p5js.org
-    return template("picture")
-
->>>>>>> 3b492687911e53785917056e497736163522cb5d
-
-@get("/visit")
-def get_visit():
     session_id = request.cookies.get("session_id",str(uuid.uuid4()))
     result = db.search(query.session_id == session_id)
     if len(result) == 0:

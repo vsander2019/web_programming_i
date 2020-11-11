@@ -90,18 +90,12 @@ def get_delete_item(id):
     cursor.close()
     redirect('/')
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-visits = 0
+@get("/picture")
+def get_picture():
+    # picture from here: https://editor.p5js.org/p5/sketches/Hello_P5:_animate
+    # p5js.org
+    return template("picture")
 
-visit_times = {
-    }
-first_visit = {
-    }
-
->>>>>>> 9962eec54840df3ac4f99ded02db70b4f34e787e
 
 @get("/visit")
 def get_visit():

@@ -90,6 +90,18 @@ def get_delete_item(id):
     cursor.close()
     redirect('/')
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+visits = 0
+
+visit_times = {
+    }
+first_visit = {
+    }
+
+>>>>>>> 9962eec54840df3ac4f99ded02db70b4f34e787e
 
 @get("/visit")
 def get_visit():

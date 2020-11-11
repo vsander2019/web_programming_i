@@ -94,6 +94,7 @@ def get_delete_item(id):
     redirect('/')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 visits = 0
 
 visit_times = {
@@ -115,6 +116,14 @@ def get_visit():
         first_visit[user_id] = visit_times[user_id]
     return("User #" + user_id + " you have visited this useless webpage " + str(visit_counter) + "times, and last visit was" + last_visit + "and your first visit was" + first_visit[user_id])
 =======
+=======
+@get("/picture")
+def get_picture():
+    # picture from here: https://editor.p5js.org/p5/sketches/Hello_P5:_animate
+    # p5js.org
+    return template("picture")
+
+>>>>>>> 3b492687911e53785917056e497736163522cb5d
 
 @get("/visit")
 def get_visit():

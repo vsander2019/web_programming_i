@@ -5,13 +5,10 @@ import random
 import sqlite3
 import uuid
 
-<<<<<<< HEAD
-=======
 from tinydb import TinyDB, Query
 db = TinyDB("sessions.json")
 query = Query()
 
->>>>>>> 695504f12aab72cc0fd97c385a5a53ea940c815c
 from bottle import get, post, request, response, template, redirect
 
 ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ.keys()
@@ -93,28 +90,6 @@ def get_delete_item(id):
     cursor.close()
     redirect('/')
 
-<<<<<<< HEAD
-visits = 0
-
-visit_times = {
-    }
-first_visit = {
-    }
-
-
-@get("/visit")
-def get_visit():
-    visit_counter = int(request.get_cookie("visit_counter", '0'))
-    user_id = request.cookies.get("user_id", str(random.randint(1000000000,2000000000)))
-    visit_counter = visit_counter + 1
-    response.set_cookie("visit_counter", str(visit_counter))
-    response.set_cookie("user_id", user_id, max_age = 300, httponly= True, secure= True)
-    last_visit = visit_times.get(user_id, "never")
-    visit_times[user_id] = str(datetime.datetime.now())
-    if last_visit == "never":
-        first_visit[user_id] = visit_times[user_id]
-    return("User #" + user_id + " you have visited this useless webpage " + str(visit_counter) + "times, and last visit was" + last_visit + "and your first visit was" + first_visit[user_id])
-=======
 
 @get("/visit")
 def get_visit():
@@ -128,13 +103,11 @@ def get_visit():
         visit_count = session['visit_count'] + 1
         db.update({'visit_count':visit_count},query.session_id == session_id)
     response.set_cookie("session_id",session_id)
-    return(f"Welcome, session_id #{session_id}. Visit# {visit_count}.")
->>>>>>> 695504f12aab72cc0fd97c385a5a53ea940c815c
+    return("Welcome, session_id #{session_id}. Visit# {visit_count}.")
 
 if ON_PYTHONANYWHERE:
     application = default_app()
 else:
     debug(True)
     run(host="localhost", port=8080)
-
 

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <html>
 <head>
   <title>Sandbox Page</title>
@@ -23,7 +23,7 @@ Hello from the sandbox.
 <button type="button" onclick='onCountClicksClick();'>Count Clicks</button>
 <button type="button" onclick='onShowSpecialSectionClick();'>Show Special Section</button>
 </body>
-=======
+
 <html>
 <head>
   <title>Sandbox Page</title>
@@ -48,5 +48,4 @@ Hello from the sandbox.
 <button type="button" onclick='onCountClicksClick();'>Count Clicks</button>
 <button type="button" onclick='onShowSpecialSectionClick();'>Show Special Section</button>
 </body>
->>>>>>> 695504f12aab72cc0fd97c385a5a53ea940c815c
 </html>

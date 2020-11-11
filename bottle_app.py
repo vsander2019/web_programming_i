@@ -103,11 +103,10 @@ def get_visit():
         visit_count = session['visit_count'] + 1
         db.update({'visit_count':visit_count},query.session_id == session_id)
     response.set_cookie("session_id",session_id)
-    return("Welcome, session_id #{session_id}. Visit# {visit_count}.")
+    return(f"Welcome, session_id #{session_id}. Visit# {visit_count}.")
 
 if ON_PYTHONANYWHERE:
     application = default_app()
 else:
     debug(True)
     run(host="localhost", port=8080)
-

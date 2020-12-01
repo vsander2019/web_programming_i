@@ -55,6 +55,14 @@ def get_show_list():
 def get_sandbox():
     return template("sandbox")
 
+@get('/ajaxdemo')
+def get_ajaxdemo():
+    return template("ajaxdemo")
+
+@get('/jquerydemo')
+def get_jquerydemo():
+    return template("jquerydemo")
+
 @get('/login')
 def get_login():
     return template("login", csrf_token="abcrsrerredadfa")

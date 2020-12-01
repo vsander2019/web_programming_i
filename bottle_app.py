@@ -1,5 +1,6 @@
 # A very simple Bottle Hello World app for you to get started with...
 import datetime
+import time
 import os
 import random
 import sqlite3
@@ -21,29 +22,49 @@ else:
 random.seed()
 
 @get('/')
+
 def get_show_list():
-    session_id = request.cookies.get("session_id",str(uuid.uuid4()))
-    result = db.search(query.session_id == session_id)
-    if len(result) == 0:
-        db.insert({'session_id':session_id})
-        username = "Unknown"
+
+    # ask for cookie, if we don't have one start a guest session
+    session_id = request.cookies.get("session_id",None)
+    if session_id == None:
+        session_id = str(uuid.uuid4())
+        session = {'session_id':session_id, "username":"Guest", "time":int(time.time())}
+        db.insert(session)
+        response.set_cookie("session_id",session_id)
+    # had a cookie with an id, look up the session
     else:
-        session = result[0]
-        if "username" in session:
-            username = session['username']
+        result = db.search(query.session_id == session_id)
+        # the session isn't found, start a new one
+        if len(result) == 0:
+            session_id = str(uuid.uuid4())
+            session = {'session_id':session_id, "username":"Guest", "time":int(time.time())}
+            db.insert(session)
+            response.set_cookie("session_id",session_id)
+        # the session is found, use it
         else:
-            username = "Unknown but has a cookie"
-    response.set_cookie("session_id",session_id)
+            session=result[0]
+
     connection = sqlite3.connect("todo.db")
     cursor = connection.cursor()
     cursor.execute("select * from todo")
     result = cursor.fetchall()
     cursor.close()
-    return template("show_list", rows=result, username=username)
+    return template("show_list", rows=result, session={})
+
 
 @get('/sandbox')
 def get_sandbox():
     return template("sandbox")
+
+@get('/ajaxdemo')
+def get_ajaxdemo():
+    return template("ajaxdemo")
+
+@get('/jquerydemo')
+def get_jquerydemo():
+    return template("jquerydemo")
+
 
 @get('/login')
 def get_login():

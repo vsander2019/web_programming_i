@@ -11,11 +11,7 @@
         }
     }
     console.log("sending request");
-<<<<<<< HEAD
-    xhttp.open("GET", "http://dev-web-vanessasanders.pythonanywhere.com/static/data.txt", true);
-=======
     xhttp.open("GET", "http://dev-web-drdelozier.pythonanywhere.com/static/data.txt", true);
->>>>>>> b2693012a90410afe5705293c2236191d9d3b702
     xhttp.send();
   };
   </script>
@@ -26,8 +22,4 @@ Hello from the sandbox.
 <div id="my_text"></div>
 <hr/>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> b2693012a90410afe5705293c2236191d9d3b702

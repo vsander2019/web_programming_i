@@ -2,6 +2,7 @@ import datetime
 import time
 import uuid
 import dataset
+import json
 
 db = dataset.connect('sqlite:///todo.db')
 
@@ -108,6 +109,30 @@ def get_show_list():
     result=[dict(r) for r in result]
     return template("show_list", rows=result, session=session)
 
+@get('/show_list_ajax')
+def get_show_list_ajax():
+    session = get_session(request, response)
+    if session['username'] == 'Guest':
+        redirect('/login')
+        return
+    return template("show_list_ajax", session=session)
+
+@get('/get_tasks')
+def get_get_tasks():
+    session = get_session(request, response)
+    response.content_type = 'application/json'
+    if session['username'] == 'Guest':
+        return "[]"
+    else:
+        result = db['todo'].all()
+        tasks= [dict(r) for r in result]
+        # tasks = [
+        #     {"id" : 1, "task": "do something interesting", "status":False },
+        #     {"id" : 2, "task": "do something enjoyable", "status":False },
+        #     {"id" : 3, "task": "do something useful", "status":False }
+        #     ]
+        text = json.dumps(tasks)
+        return text
 
 @get('/update_status/<id:int>/<value:int>')
 def get_update_status(id, value):
